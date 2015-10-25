@@ -8,17 +8,19 @@ var Enemy = (function () {
   })();
   
   return {
-    create : function (x,y, attackSurfaces, opponent) {
-      var enemy = Character.create(x,y, 'enemy'),
-          key,
-          weapon;
+    create : function (x,y, attackSurfaces, opponent, level) {
+      var enemy = Character.create(x,y, 'enemy', level);
 
       game.physics.arcade.enable(enemy);
       zOrder.putInLayer(enemy, 'ENEMIES');
       enemy.weapons = EnemyWeapon.createAll(enemy, attackSurfaces);
       enemy.opponent = opponent;
 
+      enemy.body.allowGravity = false;
+
       util.inheritFunctions(enemy, Instance);
+
+      level.enemies.push(enemy);
 
       return enemy;
     }

@@ -10,7 +10,7 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="35"
-   height="70"
+   height="105"
    id="svg3781"
    version="1.1"
    inkscape:version="0.48.5 r10040"
@@ -24,7 +24,7 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="4"
+     inkscape:zoom="1"
      inkscape:cx="19.845545"
      inkscape:cy="58.459781"
      inkscape:document-units="px"
@@ -68,12 +68,12 @@
      inkscape:label="set"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-8.7907495)"
+     transform="translate(0,26.20925)"
      style="display:inline">
     <path
        style="fill:#ffff00;fill-opacity:1;fill-rule:nonzero;stroke:none"
        inkscape:transform-center-y="-6.0013018"
-       d="m 17.499999,52.83067 c 11.490531,-10e-7 11.431673,25.401208 11.431673,25.401208 l -22.8633444,1e-6 c 0,0 -0.058863,-25.401209 11.4316714,-25.401209 z"
+       d="m 17.499999,43.58067 c 11.490531,-10e-7 11.431673,34.651208 11.431673,34.651208 l -22.8633444,1e-6 c 0,0 -0.058863,-34.651209 11.4316714,-34.651209 z"
        id="path4542"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="sccs" />
@@ -81,13 +81,13 @@
        sodipodi:nodetypes="sccs"
        inkscape:connector-curvature="0"
        id="path4545"
-       d="m 17.499999,36.390437 c 16.540893,0 14.784491,41.841441 14.784491,41.841441 l -29.5689797,1e-6 c 0,0 -1.75640363,-41.841442 14.7844887,-41.841442 z"
+       d="m 17.499999,18.890437 c 16.540893,0 14.784491,59.341441 14.784491,59.341441 l -29.5689797,1e-6 c 0,0 -1.75640363,-59.341442 14.7844887,-59.341442 z"
        inkscape:transform-center-y="-6.0013019"
        style="fill:#ffff00;fill-opacity:0.60818715;fill-rule:nonzero;stroke:none" />
   </g>
   <g
      style="display:inline"
-     transform="translate(0,-8.7907495)"
+     transform="translate(0,26.20925)"
      id="g5055"
      inkscape:groupmode="layer"
      inkscape:label="damage">
@@ -95,13 +95,13 @@
        sodipodi:nodetypes="cccc"
        inkscape:connector-curvature="0"
        id="path5057"
-       d="m 17.499999,14.646904 9.835094,63.584974 -19.6701855,1e-6 z"
-       inkscape:transform-center-y="-6.0013019"
+       d="m 17.499999,-17.973114 9.835094,96.204991 -19.6701855,2e-6 z"
+       inkscape:transform-center-y="-9.0800571"
        style="fill:#ffff00;fill-opacity:1;fill-rule:nonzero;stroke:none" />
     <path
        style="fill:#ffff00;fill-opacity:0.60818715;fill-rule:nonzero;stroke:none"
-       inkscape:transform-center-y="-6.0013019"
-       d="m 17.499999,9.520379 14.784491,68.711499 -29.5689797,1e-6 z"
+       inkscape:transform-center-y="-9.0800571"
+       d="m 17.499999,-25.729621 14.784491,103.961498 -29.5689797,2e-6 z"
        id="path5059"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />

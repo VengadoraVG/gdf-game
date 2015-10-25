@@ -6,19 +6,19 @@ var EnemyWeapon = (function () {
       update : function () {
         var i=0;
 
+        // this.wallBlocked = false;
         this.x = this.owner.x;
         this.y = this.owner.y;
-
-        // for (i=0; i<this.ray.length; i++) {
-        //   game.physics.arcade.overlap(this.ray[i],
-        //                               this.owner.opponent,
-        //                               forceShoot, this);
-        //   this.ray[i].x = this.x +
-        //     util.directionHash[this.direction][X] * config.ray.width * i;
-        //   this.ray[i].y = this.y +
-        //     util.directionHash[this.direction][Y] * config.ray.height * i;
-        // }
       },
+
+      shoot : function (ray, target) {
+        var i;
+        target.takeDamage();
+
+        for (i=0; i<this.ray.length; i++) {
+          this.ray[i].activate();
+        }
+      }
     };
   })();
 
@@ -29,6 +29,7 @@ var EnemyWeapon = (function () {
 
       for (key in attackSurfaces) {
         weapon = game.add.sprite(owner.x,owner.y, 'enemy');
+        owner.part.push(weapon);
         weapon.animations.add('weapon', [1]).play();
         weapon.anchor.set(0.5, 0.5);
         weapon.rotation = util.rotationHash[key];
@@ -42,7 +43,7 @@ var EnemyWeapon = (function () {
         zOrder.putInLayer(weapon, 'WEAPON');
       }
 
-      return weapon;
+      return weapons;
     }
   }
 })();

@@ -1,12 +1,18 @@
 var You = (function () {
   var Instance = (function () {
-    var die = function () {
-      this.kill();
+    var updateEnd = function () {
+      var worldRectangle =
+          new Phaser.Rectangle(0,0, game.world.width, game.world.height);
+
+      if (!worldRectangle.containsRect(this)) {
+        this.level.end();
+      }
     };
 
     return {
       update : function () {
         var movement = this.control;
+        updateEnd.call(this);
         this.dad.update.call(this);
 
         this.body.velocity.x = 0;
@@ -19,43 +25,37 @@ var You = (function () {
           this.body.velocity.x = this.speed;
           this.scale.x = 1;
         }
-        if (movement.up.isDown && this.body.blocked.down) {
-          this.body.velocity.y = this.jumpSpeed;
+      },
+
+      canUse : function (weapon) {
+        return weapon.index === this.energy-1;
+      },
+
+      jump : function () {
+        if (this.body.blocked.down) {
+          this.body.velocity.y = -this.jumpSpeed;
         }
       },
-
-      takeDamage : function () {
-        if (!this.isDying()) {
-          this.startDying();
-        }
-      },
-
-      startDying : function () {
-        this.dyingTween = game.add.tween(this)
-          .to({alpha: 0}, 250, Phaser.Easing.Linear.In, true);
-        game.time.events.add(250, die, this);
-      },
-
-      isDying : function () {
-        return this.dyingTween && this.dyingTween.isRunning;
-      },
-
-      isActive : function () {
-        return !this.isDying() && this.alive;
-      }
     };
-  })();  
+  })();
   
   return {
-    create : function (x,y) {
-      var you = Character.create(x,y, 'you');
+    create : function (x,y, level) {
+      var you = Character.create(x,y, 'you', level);
 
+      you.body.setSize(you.width/2, you.height/2, 0, you.height/4);
       you.control = game.input.keyboard.createCursorKeys();
-      you.jumpSpeed = config.you.jumpSpeed;
+      you.jumpSpeed = Math.sqrt(2 * config.you.jumpHeight *
+                                config.world.gravity);
       you.speed = config.you.speed;
-      you.weapon = Weapon.create(you);
+      you.weapon = WeaponSystem.create(you);
+
+      you.rangedAttack = RangedAttack.create(you);
+      you.energy = 3;
 
       util.inheritFunctions(you, Instance);
+      you.control.up.onDown.add(you.jump, you);
+
       zOrder.putInLayer(you, 'PC');
       
       return you;

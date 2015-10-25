@@ -1,6 +1,5 @@
 var Weapon = (function () {
   var Instance = (function () {
-
     return {
       update : function () {
         var key;
@@ -9,14 +8,15 @@ var Weapon = (function () {
         this.y = this.owner.y;
 
         if (!this.animations.currentAnim.isPlaying) {
-          this.alpha = 0;
+          this.alpha = 0.5;
           this.animations.play('none');
         }
       },
 
       attackOnCommand : function () {
+        console.log(this.index);
         for (key in this.control) {
-          if (this.control[key].isDown) {
+          if (this.control[key].isDown && this.owner.canUse(this)) {
             this.rotation = util.rotationHash[key];
             this.alpha = 1;
             this.animations.play('attack');
@@ -27,29 +27,39 @@ var Weapon = (function () {
       }
     };
   })();
-  
-  return {
-    create : function (owner) {
-      var weapon = game.add.sprite(owner.x,owner.y, 'weapon'),
-          key;
-      weapon.anchor.set(0.5, 1);
-      weapon.animations.add('none', [0]);
-      weapon.animations.add('attack', [0,1], 8, false);
-      weapon.animations.play('none');
-      weapon.alpha = 0;
-      weapon.owner = owner;
 
-      weapon.control = {
+  return {
+    createCursors : function () {
+      this.control = {
         up : game.input.keyboard.addKey(Phaser.Keyboard.W),
         right : game.input.keyboard.addKey(Phaser.Keyboard.D),
         down : game.input.keyboard.addKey(Phaser.Keyboard.S),
         left : game.input.keyboard.addKey(Phaser.Keyboard.A)
       };
 
-      util.inheritFunctions(weapon, Instance);
+      return this.control;
+    },
 
-      for (key in weapon.control) {
-        weapon.control[key].onDown.add(Instance.attackOnCommand, weapon);
+    create : function (owner, index) {
+      var weapon = game.add.sprite(owner.x,owner.y, index + 'hit'),
+          key;
+      weapon.anchor.set(0.5, 1);
+      weapon.animations.add('none', [0]);
+      weapon.animations.add('attack', [1,1,0,1,0], 15, false);
+      weapon.animations.play('none');
+      weapon.alpha = .5;
+      weapon.owner = owner;
+
+      if (!this.control) {
+        this.createCursors();
+      }
+
+      util.inheritFunctions(weapon, Instance);
+      weapon.index = index;
+
+      for (key in this.control) {
+        console.log(key + weapon.index);
+        this.control[key].onDown.add(weapon.attackOnCommand, weapon);
       }
 
       zOrder.putInLayer(weapon, 'PC_RAY');
